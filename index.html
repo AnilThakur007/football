@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Riverside Football Academy — Full-Time Program</title>
+<style>
+  :root{
+    --green:#10b981;
+    --green-dark:#047857;
+    --green-soft:#ecfdf5;
+    --navy:#0b1b2b;
+    --navy-2:#12293f;
+    --ink:#0f172a;
+    --muted:#64748b;
+    --line:#e2e8f0;
+    --bg:#f6f9fc;
+    --card:#fff;
+    --amber:#f59e0b;
+    --amber-soft:#fffbeb;
+    --red:#dc2626;
+    --red-soft:#fef2f2;
+    --r:16px;
+    --sh:0 1px 2px rgba(15,23,42,.05), 0 8px 24px rgba(15,23,42,.06);
+    --sh-lg:0 4px 12px rgba(15,23,42,.06), 0 20px 48px rgba(15,23,42,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  .narrow{max-width:760px;margin:0 auto;padding:0 20px}
+
+  /* ================= NAV ================= */
+  .nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(11,27,43,.96);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;color:#fff;font-weight:800;font-size:16px;cursor:pointer}
+  .logo .mark{
+    width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--green),#059669);font-size:18px;
+  }
+  .nav-links{display:flex;gap:22px;align-items:center}
+  .nav-links a{color:#a9bccd;text-decoration:none;font-size:14px;font-weight:600;transition:.15s}
+  .nav-links a:hover{color:#fff}
+  .nav-cta{
+    background:var(--green);color:#fff;border:none;font-family:inherit;font-weight:800;
+    font-size:14px;padding:10px 20px;border-radius:10px;cursor:pointer;transition:.15s;
+  }
+  .nav-cta:hover{background:#059669;transform:translateY(-1px)}
+  @media (max-width:760px){ .nav-links{display:none} }
+
+  /* ================= VIEWS ================= */
+  .view{display:none}
+  .view.active{display:block;animation:fadeUp .35s ease}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+  /* ================= LANDING ================= */
+  .hero{
+    background:
+      radial-gradient(900px 420px at 80% -15%, rgba(16,185,129,.30), transparent 62%),
+      linear-gradient(150deg,#0b1b2b 0%,#0d2b3e 55%,#0a3b2e 100%);
+    color:#fff;padding:76px 0 84px;position:relative;overflow:hidden;
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='1' fill='%23ffffff' opacity='.06'/%3E%3C/svg%3E");
+    pointer-events:none;
+  }
+  .hero .wrap{position:relative;z-index:1}
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+    color:#a7f3d0;border:1px solid rgba(167,243,208,.35);
+    padding:6px 15px;border-radius:999px;margin-bottom:22px;
+  }
+  .hero h1{
+    font-size:clamp(30px,5vw,50px);line-height:1.12;letter-spacing:-.03em;
+    max-width:680px;margin-bottom:18px;
+  }
+  .hero h1 em{color:#6ee7b7;font-style:normal}
+  .hero p.lead{font-size:17.5px;color:#c3d3e0;max-width:560px;margin-bottom:32px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:44px}
+  .btn{
+    font-family:inherit;font-weight:800;font-size:15px;border-radius:12px;
+    padding:14px 26px;cursor:pointer;border:2px solid transparent;transition:.18s;
+    display:inline-flex;align-items:center;gap:9px;text-decoration:none;
+  }
+  .btn.primary{background:var(--green);color:#fff;box-shadow:0 8px 24px rgba(16,185,129,.32)}
+  .btn.primary:hover{background:#059669;transform:translateY(-2px);box-shadow:0 12px 30px rgba(16,185,129,.38)}
+  .btn.outline{background:transparent;color:#fff;border-color:rgba(255,255,255,.28)}
+  .btn.outline:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+  .btn.ghost{background:#fff;color:#334155;border-color:var(--line)}
+  .btn.ghost:hover{border-color:#cbd5e1;background:#f8fafc}
+  .btn.sm{padding:10px 18px;font-size:13.5px}
+  .btn:disabled{opacity:.6;cursor:not-allowed;transform:none!important}
+
+  .hero-stats{display:flex;gap:34px;flex-wrap:wrap}
+  .hero-stats div strong{display:block;font-size:26px;letter-spacing:-.02em;color:#6ee7b7}
+  .hero-stats div span{font-size:13px;color:#94a9bd;font-weight:600}
+
+  /* program cards */
+  .section{padding:72px 0}
+  .section-head{text-align:center;max-width:620px;margin:0 auto 44px}
+  .section-head h2{font-size:clamp(24px,3.4vw,34px);letter-spacing:-.025em;margin-bottom:12px}
+  .section-head p{color:var(--muted);font-size:16px}
+
+  .prog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
+  .prog{
+    background:var(--card);border:2px solid var(--line);border-radius:var(--r);
+    padding:28px 26px 26px;cursor:pointer;transition:.2s;position:relative;
+    box-shadow:var(--sh);
+  }
+  .prog:hover{border-color:var(--green);transform:translateY(-4px);box-shadow:var(--sh-lg)}
+  .prog .icon{font-size:34px;margin-bottom:14px;display:block}
+  .prog h3{font-size:19px;letter-spacing:-.015em;margin-bottom:6px}
+  .prog .desc{font-size:13.5px;color:var(--muted);margin-bottom:18px;min-height:40px}
+  .prog .price{font-size:30px;font-weight:800;letter-spacing:-.03em;color:var(--green-dark)}
+  .prog .price small{font-size:14px;font-weight:700;color:var(--muted);letter-spacing:0}
+  .prog .meta{font-size:12.5px;color:var(--muted);margin-top:6px}
+  .prog .pick{
+    margin-top:20px;width:100%;padding:12px;border-radius:10px;
+    background:var(--green-soft);color:var(--green-dark);border:1.5px solid #a7f3d0;
+    font-weight:800;font-size:14px;font-family:inherit;cursor:pointer;transition:.15s;
+  }
+  .prog:hover .pick{background:var(--green);color:#fff;border-color:var(--green)}
+
+  /* how it works */
+  .how-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:26px}
+  .how{text-align:center}
+  .how .num{
+    width:56px;height:56px;border-radius:50%;margin:0 auto 16px;
+    display:grid;place-items:center;font-size:24px;
+    background:var(--green-soft);border:2px solid #a7f3d0;
+  }
+  .how h4{font-size:16px;margin-bottom:6px;letter-spacing:-.01em}
+  .how p{font-size:14px;color:var(--muted)}
+
+  .included{
+    background:#fff;border-radius:20px;padding:40px;box-shadow:var(--sh);
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:26px;
+  }
+  .inc{display:flex;gap:13px;align-items:flex-start}
+  .inc .tick{
+    flex:0 0 26px;width:26px;height:26px;border-radius:50%;
+    background:var(--green-soft);color:var(--green-dark);
+    display:grid;place-items:center;font-size:14px;font-weight:900;
+  }
+  .inc strong{display:block;font-size:14.5px;margin-bottom:2px}
+  .inc span{font-size:13.5px;color:var(--muted)}
+
+  /* ================= WIZARD ================= */
+  .wizard{max-width:760px;margin:0 auto;padding:34px 20px 130px}
+  .wiz-head{margin-bottom:26px}
+  .wiz-head h2{font-size:26px;letter-spacing:-.025em;margin-bottom:6px}
+  .wiz-head p{color:var(--muted);font-size:14.5px}
+
+  .progress{display:flex;gap:8px;margin-bottom:28px}
+  .progress .seg{
+    flex:1;height:6px;border-radius:99px;background:#e2e8f0;overflow:hidden;position:relative;
+  }
+  .progress .seg i{
+    position:absolute;inset:0;width:0;background:linear-gradient(90deg,var(--green),#34d399);
+    border-radius:99px;transition:width .35s ease;
+  }
+  .progress .seg.done i,.progress .seg.active i{width:100%}
+  .progress .seg.active i{background:linear-gradient(90deg,var(--green),#6ee7b7)}
+
+  .panel{display:none}
+  .panel.active{display:block;animation:fadeUp .28s ease}
+  .panel h3{
+    font-size:13px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--green-dark);font-weight:800;margin-bottom:20px;
+  }
+
+  .fcard{
+    background:#fff;border:1px solid var(--line);border-radius:var(--r);
+    padding:26px;box-shadow:var(--sh);margin-bottom:20px;
+  }
+
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .row3{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px}
+  @media (max-width:620px){.row2,.row3{grid-template-columns:1fr}}
+
+  .field{margin-bottom:16px}
+  .field:last-child{margin-bottom:0}
+  .field label{display:block;font-size:13.5px;font-weight:700;margin-bottom:7px}
+  .field label .req{color:var(--red)}
+  .field .hint{font-size:12.5px;color:var(--muted);margin-top:6px}
+  input[type=text],input[type=email],input[type=tel],input[type=date],textarea,select{
+    width:100%;padding:13px 14px;border:1.5px solid var(--line);border-radius:11px;
+    font-size:15px;font-family:inherit;color:var(--ink);background:#fff;
+    transition:.15s;outline:none;
+  }
+  textarea{resize:vertical;min-height:78px}
+  input:focus,textarea:focus,select:focus{
+    border-color:var(--green);box-shadow:0 0 0 3.5px rgba(16,185,129,.14);
+  }
+  input.bad,textarea.bad,select.bad{border-color:var(--red);background:var(--red-soft)}
+
+  /* expandable optional section */
+  .optional{
+    background:#fff;border:1px dashed #cbd5e1;border-radius:var(--r);
+    overflow:hidden;margin-bottom:20px;
+  }
+  .optional summary{
+    padding:16px 20px;cursor:pointer;list-style:none;
+    display:flex;align-items:center;gap:12px;font-weight:700;font-size:14.5px;
+    color:#475569;transition:.15s;
+  }
+  .optional summary::-webkit-details-marker{display:none}
+  .optional summary:hover{background:#f8fafc}
+  .optional summary .plus{
+    width:24px;height:24px;border-radius:50%;background:#eef2f7;color:#64748b;
+    display:grid;place-items:center;font-size:15px;font-weight:800;transition:.2s;
+  }
+  .optional[open] summary .plus{transform:rotate(45deg);background:var(--green-soft);color:var(--green-dark)}
+  .optional summary .tag{
+    margin-left:auto;font-size:11px;font-weight:800;letter-spacing:.05em;
+    text-transform:uppercase;color:#94a3b8;background:#f1f5f9;
+    padding:3px 10px;border-radius:99px;
+  }
+  .optional .opt-body{padding:4px 20px 22px;border-top:1px solid var(--line)}
+
+  /* big visual choice cards */
+  .choices{display:grid;gap:14px}
+  .choices.two{grid-template-columns:1fr 1fr}
+  .choices.three{grid-template-columns:repeat(3,1fr)}
+  @media (max-width:640px){.choices.two,.choices.three{grid-template-columns:1fr}}
+  .choice{position:relative;cursor:pointer;display:block}
+  .choice input{position:absolute;opacity:0;pointer-events:none}
+  .choice .cbody{
+    display:block;padding:22px 18px;border:2px solid var(--line);border-radius:14px;
+    background:#fff;transition:.18s;text-align:center;height:100%;
+  }
+  .choice .cbody .ico{font-size:32px;display:block;margin-bottom:10px}
+  .choice .cbody strong{display:block;font-size:15.5px;margin-bottom:4px;letter-spacing:-.01em}
+  .choice .cbody small{display:block;font-size:12.5px;color:var(--muted);line-height:1.45}
+  .choice .cbody .amt{
+    display:block;margin-top:10px;font-size:17px;font-weight:800;color:var(--green-dark);
+    letter-spacing:-.02em;
+  }
+  .choice:hover .cbody{border-color:#c7d7e5;transform:translateY(-2px)}
+  .choice input:checked + .cbody{
+    border-color:var(--green);background:var(--green-soft);
+    box-shadow:0 0 0 4px rgba(16,185,129,.13);transform:translateY(-2px);
+  }
+  .choice.bad .cbody{border-color:var(--red);background:var(--red-soft)}
+  .choice .cbody .kit-badge{
+    display:inline-block;margin-top:9px;font-size:10.5px;font-weight:900;
+    letter-spacing:.05em;text-transform:uppercase;
+    background:#fef3c7;color:#92400e;padding:3px 9px;border-radius:99px;
+  }
+
+  /* consent */
+  .consent{
+    display:flex;gap:13px;align-items:flex-start;padding:16px 18px;
+    border:1.5px solid var(--line);border-radius:12px;cursor:pointer;
+    transition:.15s;background:#fff;margin-bottom:12px;
+  }
+  .consent:hover{border-color:#c7d7e5}
+  .consent input{
+    margin-top:2px;width:20px;height:20px;flex:0 0 20px;
+    accent-color:var(--green);cursor:pointer;
+  }
+  .consent .ct strong{display:block;font-size:14.5px;margin-bottom:3px}
+  .consent .ct small{font-size:12.5px;color:var(--muted);line-height:1.5;display:block}
+  .consent.bad{border-color:var(--red);background:var(--red-soft)}
+  .consent .ct a{color:var(--green-dark);font-weight:700}
+
+  /* payment box */
+  .paybox{
+    background:linear-gradient(180deg,#fbfdff,#fff);
+    border:1.5px solid var(--line);border-radius:14px;padding:22px;
+  }
+  .paybox-head{
+    display:flex;align-items:center;justify-content:space-between;
+    margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--line);
+  }
+  .paybox-head h4{font-size:15px}
+  .stripe-tag{
+    font-size:11px;font-weight:900;letter-spacing:.06em;
+    background:#efe9ff;color:#5b34c9;padding:5px 11px;border-radius:99px;
+  }
+
+  .recap{
+    background:var(--green-soft);border:1.5px solid #a7f3d0;
+    border-radius:12px;padding:16px 18px;margin-top:20px;
+  }
+  .recap .rl{
+    display:flex;justify-content:space-between;gap:12px;
+    font-size:14px;padding:4px 0;color:#065f46;
+  }
+  .recap .rl span:last-child{font-weight:800}
+  .recap .rl.big{
+    border-top:1px solid #a7f3d0;margin-top:8px;padding-top:12px;
+    font-size:16px;color:#064e3b;
+  }
+  .recap .rl.big span:last-child{font-size:22px;letter-spacing:-.02em}
+
+  /* sticky bottom bar */
+  .stickybar{
+    position:fixed;bottom:0;left:0;right:0;z-index:60;
+    background:rgba(255,255,255,.97);backdrop-filter:blur(12px);
+    border-top:1px solid var(--line);
+    box-shadow:0 -4px 24px rgba(15,23,42,.07);
+  }
+  .stickybar .wrap{
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding-top:14px;padding-bottom:14px;flex-wrap:wrap;
+  }
+  .sb-total span{display:block;font-size:11.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:#94a3b8}
+  .sb-total strong{font-size:23px;letter-spacing:-.025em;color:var(--green-dark)}
+  .sb-total em{font-style:normal;font-size:12.5px;color:var(--muted);font-weight:600}
+  .sb-actions{display:flex;gap:11px;align-items:center;margin-left:auto}
+
+  .alert{
+    display:none;padding:13px 18px;border-radius:11px;margin-bottom:18px;
+    background:var(--red-soft);border:1px solid #fecaca;color:#991b1b;
+    font-size:14px;font-weight:600;
+  }
+  .alert.show{display:block;animation:fadeUp .2s ease}
+
+  .spin{
+    display:inline-block;width:15px;height:15px;border:2.5px solid rgba(255,255,255,.35);
+    border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;
+    margin-right:9px;vertical-align:-3px;
+  }
+  @keyframes sp{to{transform:rotate(360deg)}}
+
+  /* ================= SUCCESS ================= */
+  .success-wrap{max-width:720px;margin:0 auto;padding:44px 20px 90px}
+  .success-hero{text-align:center;margin-bottom:34px}
+  .success-hero .check{
+    width:76px;height:76px;border-radius:50%;margin:0 auto 20px;
+    background:var(--green-soft);border:2.5px solid #a7f3d0;
+    display:grid;place-items:center;font-size:36px;color:var(--green-dark);
+    animation:pop .5s cubic-bezier(.2,1.4,.4,1);
+  }
+  @keyframes pop{0%{transform:scale(.4);opacity:0}100%{transform:scale(1);opacity:1}}
+  .success-hero h1{font-size:clamp(24px,4vw,34px);letter-spacing:-.03em;margin-bottom:10px}
+  .success-hero p{color:var(--muted);font-size:16px;max-width:480px;margin:0 auto}
+
+  .scard{
+    background:#fff;border:1px solid var(--line);border-radius:var(--r);
+    box-shadow:var(--sh);padding:26px;margin-bottom:20px;
+  }
+  .scard h3{
+    font-size:13px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--green-dark);font-weight:800;margin-bottom:18px;
+  }
+
+  .ids{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media (max-width:560px){.ids{grid-template-columns:1fr}}
+  .idbox{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:13px 15px}
+  .idbox span{display:block;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:#94a3b8;font-weight:800;margin-bottom:4px}
+  .idbox code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.5px;font-weight:700}
+
+  table.sched{width:100%;border-collapse:collapse;font-size:14px}
+  table.sched th{
+    text-align:left;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+    color:#94a3b8;font-weight:800;padding:0 12px 10px;border-bottom:1px solid var(--line);
+  }
+  table.sched td{padding:14px 12px;border-bottom:1px solid #f1f5f9;vertical-align:top}
+  table.sched tr:last-child td{border-bottom:0}
+  table.sched .amt{text-align:right;font-weight:800;white-space:nowrap}
+  .st{font-size:10.5px;font-weight:900;padding:4px 10px;border-radius:99px;white-space:nowrap}
+  .st.paid{background:var(--green-soft);color:var(--green-dark)}
+  .st.sched{background:#f1f5f9;color:#64748b}
+  .kitline{display:block;font-size:11.5px;color:#92400e;font-weight:800;margin-top:3px}
+
+  /* next steps timeline */
+  .timeline{position:relative;padding-left:34px}
+  .timeline::before{
+    content:"";position:absolute;left:11px;top:8px;bottom:8px;width:2px;
+    background:linear-gradient(180deg,var(--green),#a7f3d0);
+    border-radius:2px;
+  }
+  .tl{position:relative;padding-bottom:24px}
+  .tl:last-child{padding-bottom:0}
+  .tl::before{
+    content:"";position:absolute;left:-29px;top:4px;
+    width:14px;height:14px;border-radius:50%;
+    background:#fff;border:3px solid var(--green);
+  }
+  .tl.done::before{background:var(--green)}
+  .tl strong{display:block;font-size:14.5px;margin-bottom:3px}
+  .tl span{font-size:13.5px;color:var(--muted);display:block}
+  .tl .when{
+    display:inline-block;font-size:11px;font-weight:900;letter-spacing:.05em;
+    text-transform:uppercase;color:var(--green-dark);background:var(--green-soft);
+    padding:3px 9px;border-radius:99px;margin-bottom:6px;
+  }
+
+  .next-actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:6px}
+
+  .help{
+    background:var(--amber-soft);border:1px solid #fde68a;border-left:4px solid var(--amber);
+    border-radius:12px;padding:16px 18px;font-size:14px;color:#78350f;
+  }
+  .help strong{color:#92400e}
+
+  /* ================= EXPLAINER ================= */
+  .explainer{background:#fff;border-top:1px solid var(--line);padding:70px 0 80px}
+  .explainer h2{font-size:clamp(22px,3vw,30px);letter-spacing:-.025em;margin-bottom:10px}
+  .explainer .lede{color:var(--muted);font-size:16px;max-width:720px;margin-bottom:36px}
+
+  .journey{display:grid;gap:14px;margin-bottom:44px}
+  .jstep{
+    display:grid;grid-template-columns:56px 1fr;gap:20px;
+    background:#f8fafc;border:1px solid var(--line);border-radius:14px;padding:20px 22px;
+    transition:.15s;
+  }
+  .jstep:hover{border-color:#cbd5e1;background:#fff;box-shadow:var(--sh)}
+  .jstep .jn{
+    width:56px;height:56px;border-radius:14px;display:grid;place-items:center;
+    font-size:24px;background:#fff;border:1.5px solid var(--line);
+  }
+  .jstep h4{font-size:16px;letter-spacing:-.01em;margin-bottom:5px}
+  .jstep p{font-size:14px;color:var(--muted);margin-bottom:8px}
+  .jstep .tags{display:flex;gap:7px;flex-wrap:wrap}
+  .jtag{
+    font-size:11px;font-weight:800;letter-spacing:.04em;padding:3px 10px;border-radius:99px;
+  }
+  .jtag.jot{background:#e0f2fe;color:#075985}
+  .jtag.str{background:#ede9fe;color:#5b21b6}
+  .jtag.both{background:var(--green-soft);color:var(--green-dark)}
+  .jtag.you{background:#fef3c7;color:#92400e}
+
+  .exp-table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;box-shadow:var(--sh)}
+  table.exp{border-collapse:collapse;width:100%;min-width:720px;font-size:14px;background:#fff}
+  table.exp thead th{
+    background:#f1f5f9;text-align:left;font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;color:#475569;padding:13px 16px;
+    border-bottom:1px solid var(--line);white-space:nowrap;
+  }
+  table.exp td{padding:15px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+  table.exp tr:last-child td{border-bottom:0}
+  table.exp tr:nth-child(even){background:#fafcfe}
+  table.exp td:first-child{font-weight:800;color:var(--green-dark);width:36px}
+  table.exp code{
+    background:#f1f5f9;border:1px solid var(--line);border-radius:5px;
+    padding:1px 6px;font-size:12.5px;font-family:ui-monospace,Menlo,monospace;
+  }
+
+  .notes{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:30px}
+  @media (max-width:760px){.notes{grid-template-columns:1fr}}
+  .note{background:#f8fafc;border:1px solid var(--line);border-radius:14px;padding:22px}
+  .note.warn{background:var(--amber-soft);border-color:#fde68a}
+  .note h4{font-size:15.5px;margin-bottom:12px;letter-spacing:-.01em}
+  .note.warn h4{color:#92400e}
+  .note ul{padding-left:18px}
+  .note li{font-size:14px;color:#475569;margin-bottom:7px}
+  .note li strong{color:var(--ink)}
+
+  footer{background:var(--navy);color:#94a9bd;padding:32px 0;font-size:13.5px;text-align:center}
+  footer strong{color:#fff}
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<nav class="nav">
+  <div class="wrap">
+    <div class="logo" onclick="showView('landing')">
+      <span class="mark">⚽</span> Riverside FA
+    </div>
+    <div class="nav-links">
+      <a href="#" onclick="showView('landing');return false">Programs</a>
+      <a href="#" onclick="showView('landing');return false">How it works</a>
+      <a href="#" onclick="showView('landing');return false">Contact</a>
+    </div>
+    <button class="nav-cta" onclick="showView('form')">Register now</button>
+  </div>
+</nav>
+
+<!-- ============================================================
+     VIEW 1 — LANDING PAGE
+     ============================================================ -->
+<section class="view active" id="view-landing">
+
+  <div class="hero">
+    <div class="wrap">
+      <span class="badge">● 2025 Season · Enrolment Open</span>
+      <h1>Full-Time Football Program.<br><em>Four payments. No surprises.</em></h1>
+      <p class="lead">
+        A 12-month development pathway for serious young players.
+        Billed quarterly, with everything included — and a simple,
+        automatic payment setup you can forget about.
+      </p>
+      <div class="hero-cta">
+        <button class="btn primary" onclick="showView('form')">Start registration →</button>
+        <button class="btn outline" onclick="document.getElementById('programs').scrollIntoView({behavior:'smooth'})">
+          See the programs
+        </button>
+      </div>
+      <div class="hero-stats">
+        <div><strong>4</strong><span>Payments total</span></div>
+        <div><strong>12</strong><span>Month program</span></div>
+        <div><strong>3</strong><span>Program groups</span></div>
+        <div><strong>0</strong><span>Hidden fees</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- programs -->
+  <div class="section" id="programs">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Choose your program group</h2>
+        <p>Every group runs the full 12 months and is billed quarterly. Pick the one that matches your player's level.</p>
+      </div>
+
+      <div class="prog-grid">
+        <div class="prog" onclick="pickProgram('elite')">
+          <span class="icon">🏆</span>
+          <h3>Group A — Elite</h3>
+          <p class="desc">For players competing at academy or representative level. 5 sessions per week.</p>
+          <div class="price">$1,200 <small>/ quarter</small></div>
+          <div class="meta">4 payments · $4,800 total</div>
+          <button class="pick">Select Elite →</button>
+        </div>
+
+        <div class="prog" onclick="pickProgram('dev')">
+          <span class="icon">⚡</span>
+          <h3>Group B — Development</h3>
+          <p class="desc">For committed players building toward elite level. 4 sessions per week.</p>
+          <div class="price">$950 <small>/ quarter</small></div>
+          <div class="meta">4 payments · $3,800 total</div>
+          <button class="pick">Select Development →</button>
+        </div>
+
+        <div class="prog" onclick="pickProgram('found')">
+          <span class="icon">🌱</span>
+          <h3>Group C — Foundation</h3>
+          <p class="desc">For younger players developing fundamentals. 3 sessions per week.</p>
+          <div class="price">$750 <small>/ quarter</small></div>
+          <div class="meta">4 payments · $3,000 total</div>
+          <button class="pick">Select Foundation →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- how it works -->
+  <div class="section" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>How registration works</h2>
+        <p>Three minutes to complete. Everything else happens automatically.</p>
+      </div>
+      <div class="how-grid">
+        <div class="how">
+          <div class="num">📝</div>
+          <h4>1. Fill the form</h4>
+          <p>Player details, program choice, and a short medical section. Takes about 3 minutes.</p>
+        </div>
+        <div class="how">
+          <div class="num">💳</div>
+          <h4>2. Pay the first quarter</h4>
+          <p>Secure Stripe checkout. New players also pay the one-off $300 kit fee here.</p>
+        </div>
+        <div class="how">
+          <div class="num">✅</div>
+          <h4>3. You're in</h4>
+          <p>Welcome email, kit instructions, and a coach intro call — all within 48 hours.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- what's included -->
+  <div class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>What's included</h2>
+        <p>No add-ons, no hidden extras. The quarterly amount covers everything below.</p>
+      </div>
+      <div class="included">
+        <div class="inc"><span class="tick">✓</span><div><strong>All coaching sessions</strong><span>3–5 sessions per week depending on group</span></div></div>
+        <div class="inc"><span class="tick">✓</span><div><strong>Match day squad</strong><span>Weekly competitive fixtures</span></div></div>
+        <div class="inc"><span class="tick">✓</span><div><strong>Strength &amp; conditioning</strong><span>Age-appropriate S&amp;C program</span></div></div>
+        <div class="inc"><span class="tick">✓</span><div><strong>Player progress reviews</strong><span>Termly written feedback</span></div></div>
+        <div class="inc"><span class="tick">✓</span><div><strong>Insurance coverage</strong><span>Training and match day cover</span></div></div>
+        <div class="inc"><span class="tick">✓</span><div><strong>Training kit</strong><span>Included for new players ($300 one-off)</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0">
+    <div class="wrap" style="text-align:center">
+      <button class="btn primary" style="padding:16px 36px;font-size:16px" onclick="showView('form')">
+        Start registration →
+      </button>
+      <p style="margin-top:14px;font-size:13.5px;color:var(--muted)">Takes about 3 minutes · Secure Stripe checkout</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============================================================
+     VIEW 2 — REGISTRATION WIZARD
+     ============================================================ -->
+<section class="view" id="view-form">
+  <div class="wizard">
+
+    <div class="wiz-head">
+      <h2>Player registration</h2>
+      <p>Three quick steps. Your payment details are handled securely by Stripe.</p>
+    </div>
+
+    <div class="progress" id="progress">
+      <div class="seg" data-s="1"><i></i></div>
+      <div class="seg" data-s="2"><i></i></div>
+      <div class="seg" data-s="3"><i></i></div>
+    </div>
+
+    <div class="alert" id="alertBox">Please complete the highlighted fields to continue.</div>
+
+    <form id="regForm" novalidate>
+
+      <!-- ---------- STEP 1 ---------- -->
+      <div class="panel active" data-p="1">
+        <h3>Step 1 · Player &amp; contact</h3>
+
+        <div class="fcard">
+          <div class="row2">
+            <div class="field">
+              <label>Player first name <span class="req">*</span></label>
+              <input type="text" id="fname" data-v="text" placeholder="Jack">
+            </div>
+            <div class="field">
+              <label>Player last name <span class="req">*</span></label>
+              <input type="text" id="lname" data-v="text" placeholder="Thompson">
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Date of birth <span class="req">*</span></label>
+            <input type="date" id="dob" data-v="text">
+          </div>
+
+          <div class="field">
+            <label>Parent / guardian email <span class="req">*</span></label>
+            <input type="email" id="email" data-v="email" placeholder="you@example.com">
+            <div class="hint">Receipts and payment reminders go here.</div>
+          </div>
+
+          <div class="field">
+            <label>Contact phone <span class="req">*</span></label>
+            <input type="tel" id="phone" data-v="tel" placeholder="555 123 4567">
+          </div>
+        </div>
+
+        <details class="optional">
+          <summary>
+            <span class="plus">+</span>
+            Add medical &amp; emergency details
+            <span class="tag">Optional</span>
+          </summary>
+          <div class="opt-body">
+            <div class="field">
+              <label>Allergies or medical conditions</label>
+              <textarea id="medNotes" placeholder="Asthma, allergies, medication, anything our coaches should know."></textarea>
+            </div>
+            <div class="row2">
+              <div class="field">
+                <label>Emergency contact name</label>
+                <input type="text" id="ecName" placeholder="Full name">
+              </div>
+              <div class="field">
+                <label>Emergency contact phone</label>
+                <input type="tel" id="ecPhone" placeholder="555 987 6543">
+              </div>
+            </div>
+          </div>
+        </details>
+      </div>
+
+      <!-- ---------- STEP 2 ---------- -->
+      <div class="panel" data-p="2">
+        <h3>Step 2 · Program &amp; player type</h3>
+
+        <div class="fcard">
+          <div class="field">
+            <label style="margin-bottom:14px">Which program group? <span class="req">*</span></label>
+            <div class="choices three" id="groupChoices">
+              <label class="choice">
+                <input type="radio" name="group" value="elite">
+                <span class="cbody">
+                  <span class="ico">🏆</span>
+                  <strong>Elite</strong>
+                  <small>Group A · 5 sessions/week</small>
+                  <span class="amt">$1,200<small style="font-size:12px;color:var(--muted)">/qtr</small></span>
+                </span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="group" value="dev">
+                <span class="cbody">
+                  <span class="ico">⚡</span>
+                  <strong>Development</strong>
+                  <small>Group B · 4 sessions/week</small>
+                  <span class="amt">$950<small style="font-size:12px;color:var(--muted)">/qtr</small></span>
+                </span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="group" value="found">
+                <span class="cbody">
+                  <span class="ico">🌱</span>
+                  <strong>Foundation</strong>
+                  <small>Group C · 3 sessions/week</small>
+                  <span class="amt">$750<small style="font-size:12px;color:var(--muted)">/qtr</small></span>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="fcard">
+          <div class="field" style="margin-bottom:0">
+            <label style="margin-bottom:14px">Is this player new to the academy? <span class="req">*</span></label>
+            <div class="choices two">
+              <label class="choice">
+                <input type="radio" name="ptype" value="new">
+                <span class="cbody">
+                  <span class="ico">🎒</span>
+                  <strong>New player</strong>
+                  <small>First season with us</small>
+                  <span class="kit-badge">+$300 kit fee today</span>
+                </span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="ptype" value="existing">
+                <span class="cbody">
+                  <span class="ico">🔁</span>
+                  <strong>Existing player</strong>
+                  <small>Already registered</small>
+                </span>
+              </label>
+            </div>
+            <div class="hint" style="margin-top:12px">
+              The $300 kit fee is charged once, on today's payment only. It never appears again.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---------- STEP 3 ---------- -->
+      <div class="panel" data-p="3">
+        <h3>Step 3 · Payment &amp; agreement</h3>
+
+        <div class="fcard" style="padding:0;border:0;box-shadow:none;background:transparent">
+          <div class="paybox">
+            <div class="paybox-head">
+              <h4>Card details</h4>
+              <span class="stripe-tag">POWERED BY STRIPE</span>
+            </div>
+
+            <div class="field">
+              <label>Name on card <span class="req">*</span></label>
+              <input type="text" id="cardName" data-v="text" placeholder="As printed on the card">
+            </div>
+
+            <div class="field">
+              <label>Card number <span class="req">*</span></label>
+              <input type="text" id="cardNum" data-v="card" inputmode="numeric"
+                     placeholder="4242 4242 4242 4242" autocomplete="cc-number">
+            </div>
+
+            <div class="row2">
+              <div class="field">
+                <label>Expiry <span class="req">*</span></label>
+                <input type="text" id="cardExp" data-v="exp" inputmode="numeric"
+                       placeholder="MM/YY" maxlength="5" autocomplete="cc-exp">
+              </div>
+              <div class="field">
+                <label>CVC <span class="req">*</span></label>
+                <input type="text" id="cardCvc" data-v="cvc" inputmode="numeric"
+                       placeholder="123" maxlength="4" autocomplete="cc-csc">
+              </div>
+            </div>
+
+            <div class="recap" id="recapBox">
+              <div class="rl"><span>Due today</span><span id="rcToday">—</span></div>
+              <div class="rl"><span>Then every 3 months × 3</span><span id="rcFuture">—</span></div>
+              <div class="rl big"><span>Total for 12 months</span><span id="rcTotal">—</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fcard">
+          <label class="consent">
+            <input type="checkbox" id="cAgree" data-v="check">
+            <span class="ct">
+              <strong>I agree to the terms <span class="req">*</span></strong>
+              <small>
+                This covers the subscription agreement, code of conduct, and medical consent.
+                <a href="#" onclick="alert('Full terms open in the live build.\n\nKey points:\n• 12-month program, billed quarterly (4 payments)\n• Card saved by Stripe for automatic payments\n• $300 kit fee is one-off for new players only\n• Subscription cancels automatically after 12 months');return false">Read full terms</a>
+              </small>
+            </span>
+          </label>
+
+          <label class="consent" style="margin-bottom:0">
+            <input type="checkbox" id="cMedia">
+            <span class="ct">
+              <strong>Photography &amp; media consent <span style="color:#94a3b8;font-weight:600">(optional)</span></strong>
+              <small>Allow us to use photos or video of your child in club communications.</small>
+            </span>
+          </label>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <!-- sticky bottom bar -->
+  <div class="stickybar">
+    <div class="wrap">
+      <div class="sb-total">
+        <span id="sbLabel">Due today</span>
+        <strong id="sbAmount">—</strong>
+        <em id="sbSub">Select a program to see your total</em>
+      </div>
+      <div class="sb-actions">
+        <button class="btn ghost sm" id="backBtn" style="display:none">← Back</button>
+        <button class="btn primary" id="nextBtn">Continue →</button>
+        <button class="btn primary" id="payBtn" style="display:none">Pay &amp; register</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     VIEW 3 — AFTER PAYMENT / ONBOARDING
+     ============================================================ -->
+<section class="view" id="view-success">
+  <div class="success-wrap">
+
+    <div class="success-hero">
+      <div class="check">✓</div>
+      <h1>You're registered!</h1>
+      <p>Payment received. Here's exactly what happens next — and when.</p>
+    </div>
+
+    <!-- receipt -->
+    <div class="scard">
+      <h3>Payment receipt</h3>
+      <div class="ids" style="margin-bottom:22px">
+        <div class="idbox"><span>Stripe customer</span><code id="sCustomer">cus_—</code></div>
+        <div class="idbox"><span>Subscription</span><code id="sSub">sub_—</code></div>
+      </div>
+      <table class="sched">
+        <thead>
+          <tr><th>#</th><th>Date</th><th>Description</th><th style="text-align:right">Amount</th><th></th></tr>
+        </thead>
+        <tbody id="sBody"></tbody>
+      </table>
+    </div>
+
+    <!-- what happens next -->
+    <div class="scard">
+      <h3>What happens next</h3>
+      <div class="timeline">
+        <div class="tl done">
+          <span class="when">Done</span>
+          <strong>Payment confirmed</strong>
+          <span>Your card is saved securely by Stripe for future quarterly payments.</span>
+        </div>
+        <div class="tl">
+          <span class="when">Within minutes</span>
+          <strong>Welcome email + receipt</strong>
+          <span>Sent to the email address you provided. Check spam if it doesn't arrive.</span>
+        </div>
+        <div class="tl">
+          <span class="when">Within 48 hours</span>
+          <strong>Coach introduction call</strong>
+          <span>Your group coach will call to welcome the player and confirm the session schedule.</span>
+        </div>
+        <div class="tl" id="kitStep" style="display:none">
+          <span class="when">Within 5 working days</span>
+          <strong>Kit collection</strong>
+          <span>Your $300 kit fee covers a full training kit. We'll email collection details separately.</span>
+        </div>
+        <div class="tl">
+          <span class="when" id="firstSessionWhen">Date TBC</span>
+          <strong>First session</strong>
+          <span>Arrive 20 minutes early for check-in. Bring boots, shin pads and a water bottle.</span>
+        </div>
+        <div class="tl">
+          <span class="when" id="nextPayWhen">In 3 months</span>
+          <strong>Next quarterly payment</strong>
+          <span>Charged automatically to your saved card. You'll get a reminder 7 days before.</span>
+        </div>
+        <div class="tl">
+          <span class="when" id="endWhen">In 12 months</span>
+          <strong>Program ends — subscription cancels</strong>
+          <span>No further charges after the 4th payment. Nothing to cancel.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- actions -->
+    <div class="scard">
+      <h3>Useful actions</h3>
+      <div class="next-actions">
+        <button class="btn primary sm" id="icsBtn">📅 Add dates to calendar</button>
+        <button class="btn ghost sm" onclick="alert('In the live build this opens the Stripe customer portal where you can update your card or view invoices.')">Manage payment method</button>
+        <button class="btn ghost sm" onclick="alert('In the live build this opens your email client to contact the academy.')">Contact the academy</button>
+      </div>
+    </div>
+
+    <div class="help">
+      <strong>Need to change something?</strong><br>
+      You can update your card, view invoices, or cancel your subscription any time from the
+      Stripe customer portal. Your subscription ends automatically after 12 months — no action needed.
+    </div>
+
+    <div style="text-align:center;margin-top:28px">
+      <button class="btn ghost" onclick="resetAll()">Start another registration</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     EXPLAINER — FULL JOURNEY
+     ============================================================ -->
+<section class="explainer">
+  <div class="wrap">
+    <h2>The full journey — not just the form</h2>
+    <p class="lede">
+      The payment logic is only one piece. Here's every stage the parent and player moves through,
+      what they see, and which platform handles it.
+    </p>
+
+    <div class="journey">
+
+      <div class="jstep">
+        <div class="jn">🏠</div>
+        <div>
+          <h4>1. Landing page — before the form</h4>
+          <p>
+            Most parents won't fill in a form cold. The landing page does the selling first:
+            what the program is, what it costs per quarter, what's included, and how billing works.
+            Each program card is clickable and pre-selects that group in the form, so the parent
+            never has to re-choose what they already clicked.
+          </p>
+          <div class="tags">
+            <span class="jtag you">Your site / Jotform page</span>
+            <span class="jtag both">Pre-selects group in form</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="jstep">
+        <div class="jn">📝</div>
+        <div>
+          <h4>2. Registration form — fast and visual</h4>
+          <p>
+            Three short steps instead of a long page. Big tappable cards instead of dropdowns for
+            the two decisions that matter (group and player type). Medical and emergency details
+            sit in a collapsed optional section so they don't slow anyone down, but are still
+            there for the families who need them.
+          </p>
+          <div class="tags">
+            <span class="jtag jot">Jotform</span>
+            <span class="jtag both">Conditional logic</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="jstep">
+        <div class="jn">💳</div>
+        <div>
+          <h4>3. Payment — first charge differs from the rest</h4>
+          <p>
+            Existing players: one quarterly amount. New players: the same quarterly amount
+            <strong>plus a one-off $300 kit fee</strong> on this first payment only. Both go through
+            a single Stripe checkout session — one card entry, one invoice, no double charging.
+            The card is saved to the customer for every future payment.
+          </p>
+          <div class="tags">
+            <span class="jtag str">Stripe Checkout</span>
+            <span class="jtag both">One-time + recurring in one session</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="jstep">
+        <div class="jn">✅</div>
+        <div>
+          <h4>4. Immediately after payment — confirmation screen</h4>
+          <p>
+            The parent lands on a success page with their receipt, their payment schedule, and —
+            crucially — <strong>what happens next and when</strong>. A welcome screen that just says
+            "payment received" leaves parents anxious. This one tells them: welcome email now,
+            coach call within 48 hours, kit within 5 days, first session on X date.
+          </p>
+          <div class="tags">
+            <span class="jtag both">Jotform thank-you page</span>
+            <span class="jtag str">Stripe receipt</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="jstep">
+        <div class="jn">📧</div>
+        <div>
+          <h4>5. Automated emails — the invisible follow-up</h4>
+          <p>
+            Stripe sends the payment receipt automatically. Jotform sends the registration
+            confirmation to the parent and a notification to the academy. A separate welcome email
+            covers kit collection, first session details and who to contact. This is what stops
+            the academy office getting the same phone call twenty times.
+          </p>
+          <div class="tags">
+            <span class="jtag jot">Jotform autoresponder</span>
+            <span class="jtag str">Stripe receipts</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="jstep">
+        <div class="jn">🔁</div>
+        <div>
+          <h4>6. Months 3, 6 and 9 — automatic renewals</h4>
+          <p>
+            No action from the parent. Stripe charges the saved card every 3 months.
+            These invoices contain <strong>only the quarterly subscription amount</strong> —
+            the kit fee never appears again because it was created as a one-time price.
+            Smart Retries handle a failed card and prompt the parent to update it.
+          </p>
+          <div class="tags">
+            <span class="jtag str">Stripe Billing</span>
+            <span class="jtag both">Kit fee absent</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="jstep">
+        <div class="jn">🏁</div>
+        <div>
+          <h4>7. Month 12 — the subscription ends itself</h4>
+          <p>
+            After the 4th payment the subscription cancels automatically. No 5th charge, no manual
+            admin, nothing for the academy to remember. If they want to re-enrol for the next
+            season, that's a fresh registration — which is cleaner for reporting anyway.
+          </p>
+          <div class="tags">
+            <span class="jtag str">Stripe cancel_at</span>
+            <span class="jtag you">No admin needed</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- mapping table -->
+    <h3 style="font-size:19px;letter-spacing:-.02em;margin:44px 0 16px">Requirement → implementation</h3>
+    <div class="exp-table-wrap">
+      <table class="exp">
+        <thead>
+          <tr><th>#</th><th>Requirement</th><th>How it's built</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><strong>Quarterly recurring subscription</strong></td>
+            <td>Stripe recurring Price with <code>interval = month</code>, <code>interval_count = 3</code>. The cadence is owned by Stripe, not the form.</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><strong>Different amount per group</strong></td>
+            <td>One Product + recurring Price per group. The group cards in step 2 map to those prices — only one can be selected.</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><strong>Existing player — normal first payment</strong></td>
+            <td>Selecting "Existing player" hides the kit fee product and resets its value to zero, so the first invoice is subscription only.</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><strong>New player — first payment + $300</strong></td>
+            <td>Selecting "New player" reveals the one-time $300 product. Both line items submit in the same Stripe checkout session.</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><strong>Kit fee must not recur</strong></td>
+            <td>The kit fee is a one-time Price with no <code>recurring</code> attribute — structurally unable to recur. It lands on invoice #1 only.</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><strong>12-month / 4-payment term</strong></td>
+            <td><code>cancel_at</code> set to start + 12 months, or a 4-phase Subscription Schedule with <code>end_behavior: cancel</code> for a strict 4-payment cap.</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><strong>Card saved for future charges</strong></td>
+            <td>Subscription-mode Checkout creates the Customer and attaches the card as default payment method. Smart Retries enabled.</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><strong>Collect registration, medical, consents, payment</strong></td>
+            <td>Single Jotform with three steps. Medical is optional-but-available; consents are bundled into one required agreement plus an optional media toggle.</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td><strong>Clean logic, no duplicate charges</strong></td>
+            <td>One payment field only. Conditions toggle visibility and reset values — they never create a second charge path. Submit button guarded against double-clicks.</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td><strong>Full testing before go-live</strong></td>
+            <td>Stripe test mode for every group/player-type combination, plus <strong>Test Clocks</strong> to fast-forward 12 months and prove the 4-payment cap and end date.</td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td><strong>Confirm first payment, future payments, end date</strong></td>
+            <td>Handover evidence: invoice #1 showing both lines, invoices #2–4 showing subscription only, and the subscription's "Cancels on" date.</td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td><strong>Simplify + handover</strong></td>
+            <td>Audit existing fields, merge duplicates, collapse optional sections. Then a written guide plus a short walkthrough recording of Stripe and Jotform.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="notes">
+      <div class="note">
+        <h4>What makes this safe</h4>
+        <ul>
+          <li><strong>One payment field.</strong> Conditions change visibility, never charge count.</li>
+          <li><strong>Kit fee is a one-time price.</strong> It cannot recur even if form logic breaks later.</li>
+          <li><strong>The term is enforced by Stripe.</strong> No one has to remember to cancel anything.</li>
+          <li><strong>Double-submit protection.</strong> One registration = one subscription, always.</li>
+        </ul>
+      </div>
+      <div class="note warn">
+        <h4>Decisions needed before the build</h4>
+        <ul>
+          <li><strong>After 12 months:</strong> hard stop, or auto-renew for next season? (Currently built as hard stop.)</li>
+          <li><strong>Failed payments:</strong> how many retries before the academy is notified?</li>
+          <li><strong>Kit collection:</strong> posted, collected in person, or at first session?</li>
+          <li><strong>Refunds:</strong> what's the policy if a player leaves mid-term?</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <strong>Riverside Football Academy</strong> — Full-Time Program Registration<br>
+    Quarterly billing · 12-month term · one-off new player kit fee · Stripe-secured payments
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ============================================================
+     CONFIG
+     ============================================================ */
+  const GROUPS = {
+    elite: { label:"Elite",       full:"Group A — Elite",       amount:1200 },
+    dev:   { label:"Development", full:"Group B — Development", amount:950  },
+    found: { label:"Foundation",  full:"Group C — Foundation",  amount:750  }
+  };
+  const KIT   = 300;
+  const NPAY  = 4;    // 4 payments
+  const EVERY = 3;    // every 3 months
+
+  const money = new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",minimumFractionDigits:0});
+  const dfmt  = new Intl.DateTimeFormat("en-US",{month:"short",day:"numeric",year:"numeric"});
+
+  function addMonths(date,n){
+    const d = new Date(date.getTime());
+    const day = d.getDate();
+    d.setMonth(d.getMonth()+n);
+    if (d.getDate() < day) d.setDate(0);
+    return d;
+  }
+
+  const TODAY   = new Date(); TODAY.setHours(0,0,0,0);
+  const FIRST_SESSION = new Date(TODAY.getTime());
+  FIRST_SESSION.setDate(FIRST_SESSION.getDate() + 7);
+  const CANCEL  = addMonths(TODAY, EVERY * NPAY);
+
+  /* ============================================================
+     ELEMENTS
+     ============================================================ */
+  const views    = document.querySelectorAll(".view");
+  const panels   = document.querySelectorAll(".panel");
+  const segs     = document.querySelectorAll("#progress .seg");
+  const alertBox = document.getElementById("alertBox");
+
+  const backBtn  = document.getElementById("backBtn");
+  const nextBtn  = document.getElementById("nextBtn");
+  const payBtn   = document.getElementById("payBtn");
+
+  const sbLabel  = document.getElementById("sbLabel");
+  const sbAmount = document.getElementById("sbAmount");
+  const sbSub    = document.getElementById("sbSub");
+
+  let step = 1;
+  const TOTAL = 3;
+
+  /* ============================================================
+     VIEW SWITCHING
+     ============================================================ */
+  window.showView = function(name){
+    views.forEach(function(v){ v.classList.toggle("active", v.id === "view-"+name); });
+    window.scrollTo({top:0,behavior:"smooth"});
+  };
+
+  window.pickProgram = function(key){
+    const r = document.querySelector('input[name="group"][value="'+key+'"]');
+    if (r) r.checked = true;
+    updateSummary();
+    showView("form");
+    step = 1;
+    renderStep();
+  };
+
+  /* ============================================================
+     READ STATE
+     ============================================================ */
+  function getGroup(){
+    const el = document.querySelector('input[name="group"]:checked');
+    return el ? GROUPS[el.value] : null;
+  }
+  function getPType(){
+    const el = document.querySelector('input[name="ptype"]:checked');
+    return el ? el.value : null;
+  }
+  function isNew(){ return getPType() === "new"; }
+
+  /* ============================================================
+     VALIDATION
+     ============================================================ */
+  function valid(el){
+    const v = (el.value || "").trim();
+    switch(el.dataset.v){
+      case "check": return el.checked;
+      case "email": return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v);
+      case "tel":   return v.replace(/\D/g,"").length >= 7;
+      case "card":  return v.replace(/\D/g,"").length >= 15;
+      case "cvc":   return /^\d{3,4}$/.test(v);
+      case "exp": {
+        const m = v.match(/^(\d{2})\/(\d{2})$/);
+        if (!m) return false;
+        const mm = +m[1], yy = +m[2];
+        if (mm < 1 || mm > 12) return false;
+        return new Date(2000+yy, mm, 1) > new Date();
+      }
+      default: return v !== "";
+    }
+  }
+
+  function validatePanel(n){
+    const panel = document.querySelector('.panel[data-p="'+n+'"]');
+    if (!panel) return true;
+    let ok = true, firstBad = null;
+
+    panel.querySelectorAll("[data-v]").forEach(function(el){
+      const good = valid(el);
+      el.classList.toggle("bad", !good);
+      if (el.type === "checkbox"){
+        const c = el.closest(".consent");
+        if (c) c.classList.toggle("bad", !good);
+      }
+      if (!good && !firstBad) firstBad = el;
+      if (!good) ok = false;
+    });
+
+    // radio groups
+    const names = {};
+    panel.querySelectorAll('input[type="radio"]').forEach(function(r){ names[r.name] = true; });
+    Object.keys(names).forEach(function(nm){
+      const group = panel.querySelectorAll('input[name="'+nm+'"]');
+      const checked = Array.prototype.some.call(group, function(r){ return r.checked; });
+      group.forEach(function(r){
+        const c = r.closest(".choice");
+        if (c) c.classList.toggle("bad", !checked);
+      });
+      if (!checked){ ok = false; if (!firstBad) firstBad = group[0]; }
+    });
+
+    if (!ok){
+      alertBox.classList.add("show");
+      if (firstBad && firstBad.focus){ try{ firstBad.focus(); }catch(e){} }
+    } else {
+      alertBox.classList.remove("show");
+    }
+    return ok;
+  }
+
+  document.getElementById("regForm").addEventListener("input", function(e){
+    const el = e.target;
+    if (el.dataset && el.dataset.v && el.classList.contains("bad") && valid(el)){
+      el.classList.remove("bad");
+      const c = el.closest(".consent");
+      if (c) c.classList.remove("bad");
+    }
+    if (el.type === "radio"){
+      document.querySelectorAll('input[name="'+el.name+'"]').forEach(function(r){
+        const c = r.closest(".choice");
+        if (c) c.classList.remove("bad");
+      });
+    }
+    updateSummary();
+  });
+  document.getElementById("regForm").addEventListener("change", updateSummary);
+
+  /* ============================================================
+     CARD FORMATTING
+     ============================================================ */
+  const cn = document.getElementById("cardNum");
+  const ce = document.getElementById("cardExp");
+  const cc = document.getElementById("cardCvc");
+
+  cn.addEventListener("input", function(){
+    const d = this.value.replace(/\D/g,"").slice(0,16);
+    this.value = d.replace(/(.{4})/g,"$1 ").trim();
+  });
+  ce.addEventListener("input", function(){
+    let d = this.value.replace(/\D/g,"").slice(0,4);
+    if (d.length >= 3) d = d.slice(0,2) + "/" + d.slice(2);
+    this.value = d;
+  });
+  cc.addEventListener("input", function(){
+    this.value = this.value.replace(/\D/g,"").slice(0,4);
+  });
+
+  /* ============================================================
+     SUMMARY / RECAP
+     ============================================================ */
+  function updateSummary(){
+    const g = getGroup();
+    const pt = getPType();
+    const newP = pt === "new";
+    const kit = newP ? KIT : 0;
+
+    const today = g ? g.amount + kit : null;
+    const total = g ? g.amount * NPAY + kit : null;
+
+    // sticky bar
+    sbAmount.textContent = today !== null ? money.format(today) : "—";
+
+    if (step === 1 || !g){
+      sbLabel.textContent = "Due today";
+      sbSub.textContent = g
+        ? "after first payment"
+        : "Select a program to see your total";
+    } else {
+      sbLabel.textContent = step === 3 ? "Due today" : "First payment";
+      sbSub.textContent = g
+        ? "then " + money.format(g.amount) + " every 3 months"
+        : "";
+    }
+
+    // recap on step 3
+    document.getElementById("rcToday").textContent =
+      today !== null ? money.format(today) + (kit ? "  (incl. $300 kit)" : "") : "—";
+    document.getElementById("rcFuture").textContent =
+      g ? money.format(g.amount) + " each" : "—";
+    document.getElementById("rcTotal").textContent =
+      total !== null ? money.format(total) : "—";
+  }
+
+  /* ============================================================
+     STEP RENDER
+     ============================================================ */
+  function renderStep(){
+    panels.forEach(function(p){
+      p.classList.toggle("active", +p.dataset.p === step);
+    });
+    segs.forEach(function(s){
+      const n = +s.dataset.s;
+      s.classList.toggle("done", n < step);
+      s.classList.toggle("active", n === step);
+    });
+
+    backBtn.style.display = step === 1 ? "none" : "inline-flex";
+    nextBtn.style.display = step === TOTAL ? "none" : "inline-flex";
+    payBtn.style.display  = step === TOTAL ? "inline-flex" : "none";
+
+    alertBox.classList.remove("show");
+    updateSummary();
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+
+  nextBtn.addEventListener("click", function(){
+    if (!validatePanel(step)) return;
+    if (step < TOTAL){ step++; renderStep(); }
+  });
+
+  backBtn.addEventListener("click", function(){
+    if (step > 1){ step--; renderStep(); }
+  });
+
+  /* ============================================================
+     PAY
+     ============================================================ */
+  document.getElementById("regForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    if (!validatePanel(step)) return;
+
+    const g = getGroup();
+    if (!g){ step = 2; renderStep(); validatePanel(2); return; }
+
+    payBtn.disabled = true;
+    const original = payBtn.innerHTML;
+    payBtn.innerHTML = '<span class="spin"></span>Processing…';
+
+    setTimeout(function(){
+      payBtn.disabled = false;
+      payBtn.innerHTML = original;
+      showSuccess(g, isNew());
+    }, 1700);
+  });
+
+  payBtn.addEventListener("click", function(){
+    document.getElementById("regForm").requestSubmit();
+  });
+
+  /* ============================================================
+     SUCCESS SCREEN
+     ============================================================ */
+  function rid(n){
+    const c = "abcdefghijklmnopqrstuvwxyz0123456789";
+    let s = "";
+    for (let i=0;i<n;i++) s += c[Math.floor(Math.random()*c.length)];
+    return s;
+  }
+
+  function showSuccess(g, newP){
+    const kit = newP ? KIT : 0;
+
+    document.getElementById("sCustomer").textContent = "cus_" + rid(14);
+    document.getElementById("sSub").textContent = "sub_" + rid(14);
+
+    let rows = "";
+    for (let i=0;i<NPAY;i++){
+      const d = addMonths(TODAY, i*EVERY);
+      const amt = g.amount + (i===0 ? kit : 0);
+      const first = i === 0;
+
+      let desc = g.full + " — quarterly subscription";
+      if (first && kit > 0){
+        desc += '<span class="kitline">+ ' + money.format(KIT) + ' one-time new player kit fee</span>';
+      }
+
+      rows +=
+        "<tr>" +
+          "<td><strong>" + (i+1) + "</strong></td>" +
+          "<td>" + dfmt.format(d) + "</td>" +
+          "<td>" + desc + "</td>" +
+          '<td class="amt">' + money.format(amt) + "</td>" +
+          "<td>" + (first
+            ? '<span class="st paid">Paid</span>'
+            : '<span class="st sched">Scheduled</span>') + "</td>" +
+        "</tr>";
+    }
+    document.getElementById("sBody").innerHTML = rows;
+
+    document.getElementById("kitStep").style.display = newP ? "flex" : "none";
+    document.getElementById("firstSessionWhen").textContent = dfmt.format(FIRST_SESSION);
+    document.getElementById("nextPayWhen").textContent = dfmt.format(addMonths(TODAY, EVERY));
+    document.getElementById("endWhen").textContent = dfmt.format(CANCEL);
+
+    // store for ICS
+    window.__ics = { g: g, newP: newP };
+
+    showView("success");
+  }
+
+  /* ============================================================
+     ADD TO CALENDAR (.ics)
+     ============================================================ */
+  function icsDate(d){
+    const p = function(n){ return String(n).padStart(2,"0"); };
+    return d.getFullYear() + p(d.getMonth()+1) + p(d.getDate());
+  }
+
+  document.getElementById("icsBtn").addEventListener("click", function(){
+    const data = window.__ics;
+    if (!data) return;
+    const g = data.g;
+
+    const events = [];
+    events.push({
+      uid: "first-session-" + Date.now(),
+      date: FIRST_SESSION,
+      title: "First session — Riverside FA " + g.label,
+      desc: "Arrive 20 minutes early. Bring boots, shin pads and water."
+    });
+
+    for (let i=1;i<NPAY;i++){
+      const d = addMonths(TODAY, i*EVERY);
+      events.push({
+        uid: "payment-" + i + "-" + Date.now(),
+        date: d,
+        title: "Riverside FA quarterly payment " + (i+1) + " of " + NPAY,
+        desc: money.format(g.amount) + " charged automatically to your saved card."
+      });
+    }
+
+    events.push({
+      uid: "program-end-" + Date.now(),
+      date: CANCEL,
+      title: "Riverside FA program ends",
+      desc: "Final payment complete. Subscription cancels automatically — no further charges."
+    });
+
+    const lines = [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "PRODID:-//Riverside FA//Registration//EN",
+      "CALSCALE:GREGORIAN"
+    ];
+
+    events.forEach(function(ev){
+      lines.push("BEGIN:VEVENT");
+      lines.push("UID:" + ev.uid + "@riversidefa");
+      lines.push("DTSTAMP:" + icsDate(TODAY) + "T000000Z");
+      lines.push("DTSTART;VALUE=DATE:" + icsDate(ev.date));
+      lines.push("SUMMARY:" + ev.title);
+      lines.push("DESCRIPTION:" + ev.desc);
+      lines.push("END:VEVENT");
+    });
+
+    lines.push("END:VCALENDAR");
+
+    const blob = new Blob([lines.join("\r\n")], {type:"text/calendar"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "riverside-fa-dates.ics";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+  /* ============================================================
+     RESET
+     ============================================================ */
+  window.resetAll = function(){
+    document.getElementById("regForm").reset();
+    document.querySelectorAll(".bad").forEach(function(el){ el.classList.remove("bad"); });
+    document.querySelectorAll("details.optional").forEach(function(d){ d.open = false; });
+    step = 1;
+    renderStep();
+    updateSummary();
+    showView("landing");
+  };
+
+  /* ============================================================
+     INIT
+     ============================================================ */
+  renderStep();
+  updateSummary();
+
+})();
+</script>
+</body>
+</html>
